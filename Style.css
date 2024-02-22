@@ -1,0 +1,131 @@
+.HeaderPagina
+{
+    background-color: #00C2CB;
+}
+
+.TituloCabecalho
+{
+    background-color: #00C2CB;
+    color: white;
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+    text-align-last: top;
+}
+
+.Menu 
+{
+    background-color: #00C2CB;
+    color: white;
+    text-align: center;
+}
+
+.Menu a
+{
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+    text-decoration: none; 
+    color: white;
+    margin-right: 10px;
+}
+
+.Formulario
+{
+    text-align: center;
+}
+
+.Formulario h1
+{
+    color: #00C2CB;
+}
+
+.Formulario form 
+{
+    max-width: 300px; 
+    margin: 0 auto; 
+}
+
+.Formulario label
+{
+    color: #00C2CB;
+    text-align: left;
+    display: block; 
+    margin-left: 60px;
+    margin-bottom: 10px; 
+}
+
+.Formulario input
+{
+    text-align: left;
+    display: block; 
+    margin-left: 60px;
+    margin-bottom: 10px; 
+    border-radius: 5px;
+    border-color: #00C2CB;
+    border-width: 1px;
+}
+
+.Formulario button
+{
+    background-color: #00C2CB;
+    color: white;
+    display: block; 
+    align-self: center;
+    margin-top: 15px;
+    margin-left: 75px;
+    border: none; 
+    padding: 10px 20px;
+    border-radius: 5px; 
+}
+
+.tabela
+{
+    margin: 0 auto; 
+    margin-top: 20px;
+    border-collapse: collapse; 
+    width: 80%; 
+}
+
+.tabela th, .tabela td 
+{
+    border: 1px solid #ddd; 
+    padding: 8px; 
+    text-align: left;
+}
+
+.tabela th 
+{
+    background-color: #00C2CB;
+    color: white;
+}
+
+.Relatorio
+{
+    text-align: center;
+}
+
+.Relatorio h1
+{
+    color: #00C2CB;
+}
+
+.Relatorio button
+{
+    background-color: #00C2CB;
+    color: white; 
+    align-items: center;
+    border: none; 
+    padding: 10px 20px;
+    border-radius: 5px; 
+}
+
+footer
+{
+    background-color: #00C2CB; 
+    color: white;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    height: 5%;
+    width: 100%;
+}

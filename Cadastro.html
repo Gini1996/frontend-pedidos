@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Style.css">
+    <title>Cadastro de Pedidos</title>
+</head>
+<body>
+    <div class="HeaderPagina">
+        <header>
+            <div class="TituloCabecalho">
+                <p>Sistema de Pedidos</p>  
+            </div>  
+        </header>
+
+        <nav>
+            <div class="Menu">
+                <a href="ConsultaPedido.html">Consultar Pedidos</a>
+                <a href="Relatorio.html">Relatório de Pedidos</a>
+            </div>
+        </nav>
+    </div>
+
+    <div class="Formulario">
+        <h1>Cadastro de Pedidos</h1>
+
+        <form id="pedidoForm">
+            <label for="pedido">Número do Pedido:</label>
+            <input type="number" id="pedido" required>
+
+            <label for="item">Item:</label>
+            <input type="text" id="item" required>
+
+            <label for="quantidade">Quantidade:</label>
+            <input type="number" id="quantidade" required>
+
+            <button type="button" onclick="cadastrarPedido()">Cadastrar Pedido</button>
+        </form>
+    </div>
+
+    <script>
+        function cadastrarPedido() 
+		{
+            var numeroPedido = document.getElementById("pedido").value;
+            var item = document.getElementById("item").value;
+            var quantidade = document.getElementById("quantidade").value;
+
+            var pedidoData = 
+			{
+                pedido: parseInt(numeroPedido),
+                item: item,
+                quantidade: parseInt(quantidade)
+            };
+
+            fetch('http://localhost:8080/pedidos/cadastro', 
+			{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(pedidoData)
+            })
+            .then(response => response.text())
+            .then(data => 
+			{
+                console.log('Resposta da API:', data);
+                alert('Pedido cadastrado com sucesso.');
+            })
+            .catch(error => 
+			{
+                console.error('Erro ao cadastrar pedido:', error);
+                alert('Erro ao cadastrar pedido. Verifique os dados e tente novamente.'); 
+            });
+        }
+    </script>
+</body>
+<footer>
+    <p>Desenvolvido por: Leonardo Gini Ferreira</p>
+</footer>
+</html>
