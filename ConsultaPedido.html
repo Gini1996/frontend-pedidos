@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Style.css">
+    <title>Consulta de Pedidos</title>
+</head>
+<body>
+    <div class="HeaderPagina">
+        <header>
+            <div class="TituloCabecalho">
+                <p>Sistema de Pedidos</p>  
+            </div>  
+        </header>
+
+        <nav>
+            <div class="Menu">
+                <a href="Cadastro.html">Cadastrar Pedidos</a>
+                <a href="Relatorio.html">Relatório de Pedidos</a>
+            </div>
+        </nav>
+    </div>
+
+    <div class="Formulario">
+        <h1>Consulta de Pedidos</h1>
+
+        <form id="consultaForm">
+            <label for="numeroPedido">Número do Pedido:</label>
+            <input type="number" id="numeroPedido" required>
+
+            <button type="button" onclick="consultarPedidos()">Consultar Pedidos</button>
+        </form>
+
+        <div id="resultadoConsulta"></div>
+    </div>
+
+    <script>
+        function consultarPedidos() 
+        {
+            var numeroPedido = document.getElementById("numeroPedido").value;
+
+            fetch('http://localhost:8080/pedidos/' + numeroPedido, 
+            {
+                method: 'GET',
+                headers: 
+                {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {exibirResultadoConsulta(data);})
+            .catch(error => {console.error('Erro ao consultar pedidos:', error);});
+        }
+
+        function exibirResultadoConsulta(data) 
+        {
+            var resultadoDiv = document.getElementById("resultadoConsulta");
+            resultadoDiv.innerHTML = '';
+
+            if (data.length === 0) 
+            {
+                resultadoDiv.innerHTML = 'Nenhum pedido encontrado.';
+                return;
+            }
+
+            var table = document.createElement('table');
+            table.classList.add('tabela'); 
+            var headerRow = table.insertRow(0);
+
+            Object.keys(data[0]).forEach(function(key) 
+            {
+                var th = document.createElement('th');
+                th.textContent = key;
+                headerRow.appendChild(th);
+            });
+
+            data.forEach(function(rowData) 
+            {
+                var row = table.insertRow(-1);
+
+                Object.values(rowData).forEach(function(value) 
+                {
+                    var cell = row.insertCell(-1);
+                    cell.textContent = value;
+                });
+            });
+
+            resultadoDiv.appendChild(table);
+        }
+    </script>
+</body>
+<footer>
+    <p>Desenvolvido por: Leonardo Gini Ferreira</p>
+</footer>
+</html>
