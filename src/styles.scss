@@ -1,0 +1,361 @@
+$primary-color: #10B981;
+$sidebar-bg: #1F242D;
+$sidebar-card: #323844;
+$text-light: #E2E8F0;
+$text-muted: #94A3B8;
+$border-color: #E2E8F0;
+$bg-light: #F8FAFC;
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.Toast {
+  position: fixed;
+  top: 56px;
+  right: 18px;
+  left: auto;
+  transform: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-width: min(360px, calc(100vw - 32px));
+  max-width: 420px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  background: rgba(12, 18, 25, 0.88);
+  color: #FFFFFF;
+  box-shadow: 0 10px 20px rgba(15, 23, 42, 0.18);
+  font-size: 0.96rem;
+  font-weight: 600;
+  z-index: 1000;
+  animation: toastIn 0.2s ease-out;
+}
+
+.ToastError {
+  background: rgba(69, 10, 10, 0.9);
+}
+
+.ToastIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #34d399;
+  color: #0f172a;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.ToastError .ToastIcon {
+  background: #fca5a5;
+  color: #7f1d1d;
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Wrapper Principal em Flex
+.AppLayout {
+  display: flex;
+  min-height: 100vh;
+  background-color: $bg-light;
+}
+
+// --- SIDEBAR ESQUERDA ---
+.Sidebar {
+  width: 250px;
+  background-color: $sidebar-bg;
+  color: $text-light;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px 16px;
+  box-sizing: border-box;
+  position: relative;
+  transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+
+  // Botão Minimalista Flutuante na Borda
+  .toggle-btn {
+    position: absolute;
+    left: 8px;
+    right: 8px;
+    bottom: 74px;
+    height: 18px;
+    background-color: $sidebar-card;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: $text-light;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    padding: 0;
+    transition: background-color 0.2s, border-color 0.2s;
+
+    &:hover {
+      background-color: $primary-color;
+      border-color: $primary-color;
+      color: #FFFFFF;
+    }
+
+    .arrow {
+      font-size: 0.68rem;
+      line-height: 1;
+      transform: translateY(-1px);
+    }
+  }
+
+  .Brand .Logo {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #FFFFFF;
+    margin: 0 0 24px 8px;
+    white-space: nowrap;
+
+    span span {
+      color: $primary-color;
+    }
+
+    .brand-short {
+      display: none;
+      color: $primary-color;
+    }
+  }
+
+  .NavMenu {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+
+    .icon-placeholder {
+      display: none;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: $primary-color;
+    }
+
+    // Estilo base para ícones do Material
+    .nav-icon {
+      font-size: 1.2rem;
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .MenuItem {
+      display: flex;
+      align-items: center;
+      gap: 12px; // <-- Afasta o texto do ícone em ~12px (ajuste para 16px se quiser mais longe)
+      padding: 12px 16px;
+      color: $text-muted;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      border-radius: 8px;
+      white-space: nowrap;
+      transition: background 0.2s, color 0.2s;
+
+      .nav-icon {
+        color: $text-muted; // Mantém a cor suave no item inativo
+      }
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+        color: $text-light;
+
+        .nav-icon {
+          color: $text-light;
+        }
+      }
+    }
+
+    .MenuGroup {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .MenuItemActive {
+      background-color: $sidebar-card;
+      color: #FFFFFF;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border: none;
+      width: 100%;
+      box-sizing: border-box;
+      cursor: pointer;
+
+      .menu-main {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .menu-chevron {
+        color: $text-muted;
+        font-size: 0.8rem;
+        line-height: 1;
+        transition: transform 0.2s ease;
+      }
+
+      .nav-icon {
+        color: #FFFFFF;
+      }
+    }
+
+    .MenuGroup.expanded .menu-chevron {
+      transform: rotate(0deg);
+    }
+
+    .MenuGroup.collapsed .menu-chevron {
+      transform: rotate(-90deg);
+    }
+
+    .Submenu {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-left: 10px;
+      padding-left: 10px;
+      border-left: 1px solid rgba(255, 255, 255, 0.15);
+      width: calc(100% - 16px);
+
+      a {
+        color: $text-muted;
+        text-decoration: none;
+        font-size: 0.82rem;
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: color 0.2s;
+        padding: 4px 6px 4px 0;
+        width: 100%;
+        box-sizing: border-box;
+        line-height: 1.2;
+
+        .dot {
+          display: none;
+        }
+
+        &:hover, &.active {
+          color: $primary-color;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+
+  .SidebarFooter p {
+    margin: 0;
+    font-size: 0.75rem;
+    color: $text-muted;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 16px;
+    white-space: nowrap;
+    margin-top: 16px;
+  }
+
+  // --- REGRAS QUANDO A SIDEBAR ESTIVER RECOLHIDA ---
+  &.collapsed {
+    width: 64px;
+    padding: 24px 8px;
+
+    .nav-text, .brand-full, .SidebarFooter {
+      display: none !important;
+    }
+
+    .Brand .Logo {
+      margin: 0 0 24px 0;
+      text-align: center;
+
+      .brand-short {
+        display: block;
+      }
+    }
+
+    .icon-placeholder {
+      display: block;
+      margin: 0 auto;
+    }
+
+    .Submenu {
+      display: none !important;
+      margin-left: 0;
+      padding-left: 0;
+      border-left: none;
+
+      a {
+        justify-content: center;
+
+        .dot {
+          display: inline;
+        }
+      }
+    }
+
+    .MenuItem, .MenuItemActive {
+      justify-content: center;
+      padding: 12px 0;
+    }
+
+    .MenuItemActive .menu-chevron {
+      display: none;
+    }
+  }
+}
+
+// --- CONTEÚDO DIREITA ---
+.MainWrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  .TopHeader {
+    background-color: #FFFFFF;
+    border-bottom: 1px solid $border-color;
+    padding: 16px 40px;
+    display: flex;
+    justify-content: flex-end;
+
+    .Slogan {
+      margin: 0;
+      font-size: 0.85rem;
+      color: $text-muted;
+      font-weight: 500;
+    }
+  }
+
+  .MainContent {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+  }
+}

@@ -1,0 +1,62 @@
+<div class="AppLayout">
+  <aside class="Sidebar" [class.collapsed]="isCollapsed">
+
+    <button class="toggle-btn" (click)="toggleSidebar()" [attr.aria-label]="isCollapsed ? 'Expandir menu' : 'Recolher menu'">
+      <span class="arrow">{{ isCollapsed ? '❯' : '❮' }}</span>
+    </button>
+
+    <div class="Brand">
+      <h2 class="Logo">
+        <span class="brand-short">J</span>
+        <span class="brand-full">Jhow<span>Express</span></span>
+      </h2>
+    </div>
+
+    <nav class="NavMenu">
+      <a routerLink="/order-registration" class="MenuItem" title="Início">
+        <span class="material-icons nav-icon">home</span>
+        <span class="nav-text">Início</span>
+      </a>
+
+      <div class="MenuGroup" [class.expanded]="isPedidosOpen" [class.collapsed]="!isPedidosOpen">
+        <button type="button" class="MenuItemActive" title="Pedidos" (click)="togglePedidosMenu()">
+          <span class="menu-main">
+            <span class="material-icons nav-icon">assignment</span>
+            <span class="nav-text">Pedidos</span>
+          </span>
+          <span class="menu-chevron" aria-hidden="true">{{ isPedidosOpen ? '▾' : '▸' }}</span>
+        </button>
+        @if (isPedidosOpen) {
+          <div class="Submenu">
+            <a routerLink="/order-registration" routerLinkActive="active" title="Cadastro">
+              <span class="dot">•</span>
+              <span class="nav-text">Cadastro</span>
+            </a>
+            <a routerLink="/order-status" routerLinkActive="active" title="Consultar">
+              <span class="dot">•</span>
+              <span class="nav-text">Consultar</span>
+            </a>
+            <a routerLink="/order-report" routerLinkActive="active" title="Relatório">
+              <span class="dot">•</span>
+              <span class="nav-text">Relatório</span>
+            </a>
+          </div>
+        }
+      </div>
+    </nav>
+
+    <div class="SidebarFooter">
+      <p class="nav-text">Desenvolvido por: Jhow Software Ltda.</p>
+    </div>
+  </aside>
+
+  <div class="MainWrapper">
+    <header class="TopHeader">
+      <p class="Slogan">JhowExpress - Seu negócio em movimento</p>
+    </header>
+
+    <main class="MainContent">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>
