@@ -1,0 +1,25 @@
+<main class="MainContent">
+  @if (toastMessage()) {
+    <div class="Toast" [class.ToastError]="toastType() === 'error'" aria-live="polite" aria-atomic="true">
+      <span class="ToastIcon" aria-hidden="true">{{ toastType() === 'error' ? '!' : '✓' }}</span>
+      <span>{{ toastMessage() }}</span>
+    </div>
+  }
+
+  <div class="Formulario">
+    <h1>Cadastro de Pedidos</h1>
+
+    <form [formGroup]="orderForm" (ngSubmit)="cadastrarPedido()">
+      <label for="pedido">Número do Pedido:</label>
+      <input type="number" id="pedido" formControlName="pedido" />
+
+      <label for="item">Item:</label>
+      <input type="text" id="item" formControlName="item" />
+
+      <label for="quantidade">Quantidade:</label>
+      <input type="number" id="quantidade" formControlName="quantidade" />
+
+      <button type="submit">Cadastrar Pedido</button>
+    </form>
+  </div>
+</main>
