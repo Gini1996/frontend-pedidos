@@ -1,0 +1,184 @@
+$primary-color: #10B981;
+$primary-hover: #059669;
+$text-color: #064E3B;
+$border-color: #E2E8F0;
+$bg-light: #F8FAFC;
+$white: #FFFFFF;
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.order-status-page {
+  display: flex;
+  justify-content: center;
+  padding: 28px 20px;
+  background: $bg-light;
+}
+
+.consulta-card {
+  width: min(100%, 760px);
+  background: $white;
+  border: 1px solid $border-color;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+  padding: 28px 28px 20px;
+  box-sizing: border-box;
+}
+
+h1 {
+  margin: 0 0 22px;
+  color: $text-color;
+  font-size: clamp(1.8rem, 2vw, 2.3rem);
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.consulta-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+label {
+  color: $text-color;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.input-row {
+  display: flex;
+  align-items: stretch;
+  gap: 12px;
+}
+
+input {
+  flex: 1;
+  min-width: 0;
+  height: 42px;
+  padding: 0 14px;
+  border: 1px solid $border-color;
+  border-radius: 6px;
+  font-size: 1rem;
+  color: #0F172A;
+  box-sizing: border-box;
+
+  &:focus {
+    outline: none;
+    border-color: $primary-color;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+  }
+}
+
+.toolbar {
+  margin-top: 16px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.page-size-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: $text-color;
+  font-weight: 600;
+  font-size: 0.9rem;
+
+  input {
+    width: 86px;
+    min-width: 86px;
+    flex: none;
+  }
+}
+
+button {
+  border: none;
+  border-radius: 6px;
+  background: $primary-color;
+  color: $white;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0 18px;
+  min-width: 170px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background: $primary-hover;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+}
+
+.pedido-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 24px;
+  border: 1px solid $border-color;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+th,
+td {
+  padding: 12px 14px;
+  text-align: left;
+  border-bottom: 1px solid $border-color;
+}
+
+thead th {
+  background: $primary-color;
+  color: $white;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+tbody td {
+  color: #1F2937;
+  background: $white;
+}
+
+tbody tr:nth-child(even) td {
+  background: #F8FAFC;
+}
+
+.empty-state {
+  margin: 20px 0 0;
+  color: $text-color;
+  font-weight: 600;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 18px;
+  padding-top: 12px;
+  border-top: 1px solid $border-color;
+}
+
+.page-button {
+  min-width: 42px;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.material-icons {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.page-indicator {
+  color: $text-color;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
