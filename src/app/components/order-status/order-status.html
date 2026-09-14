@@ -1,69 +1,61 @@
-<body>
-<div class="Formulario">
-  <h1>Consulta de Pedidos</h1>
+<main class="order-status-page">
+  <section class="consulta-card" aria-labelledby="consulta-pedidos-titulo">
+    <h1 id="consulta-pedidos-titulo">Consulta de Pedidos</h1>
 
-  <form id="consultaForm">
-    <label for="numeroPedido">Número do Pedido:</label>
-    <input type="number" id="numeroPedido" required>
+    <form [formGroup]="consultaForm" class="consulta-form">
+      <label for="numeroPedido">Número do Pedido:</label>
 
-    <button type="button" onclick="consultarPedidos()">Consultar Pedidos</button>
-  </form>
+      <div class="input-row">
+        <input id="numeroPedido" type="number" formControlName="numeroPedido" min="1" placeholder="Digite o número" (input)="consultarPedidos()" />
+      </div>
+    </form>
 
-  <div id="resultadoConsulta"></div>
-</div>
-
-<script>
-  function consultarPedidos()
-  {
-    var numeroPedido = document.getElementById("numeroPedido").value;
-
-    fetch('http://localhost:8080/pedidos/' + numeroPedido,
-      {
-        method: 'GET',
-        headers:
-          {
-            'Content-Type': 'application/json'
+    @if (resultados().length === 0) {
+      <p class="empty-state">Nenhum pedido encontrado.</p>
+    } @else {
+      <table class="pedido-table" aria-label="Resultado da consulta de pedidos">
+        <thead>
+          <tr>
+            <th scope="col">Pedido</th>
+            <th scope="col">Item</th>
+            <th scope="col">Quantidade</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (pedido of pedidosPaginados(); track pedido.item + '-' + pedido.quantidade + '-' + pedido.pedido) {
+            <tr>
+              <td>{{ pedido.pedido }}</td>
+              <td>{{ pedido.item }}</td>
+              <td>{{ pedido.quantidade }}</td>
+            </tr>
           }
-      })
-      .then(response => response.json())
-      .then(data => {exibirResultadoConsulta(data);})
-      .catch(error => {console.error('Erro ao consultar pedidos:', error);});
-  }
+        </tbody>
+      </table>
 
-  function exibirResultadoConsulta(data)
-  {
-    var resultadoDiv = document.getElementById("resultadoConsulta");
-    resultadoDiv.innerHTML = '';
+      <div class="toolbar">
+        <label class="page-size-control" for="pageSize">
+          <span>Registros por página</span>
+          <input
+            id="pageSize"
+            type="number"
+            min="1"
+            [value]="pageSize()"
+            (input)="alterarTamanhoPagina($any($event.target).value)"
+          />
+        </label>
+      </div>
 
-    if (data.length === 0)
-    {
-      resultadoDiv.innerHTML = 'Nenhum pedido encontrado.';
-      return;
+      <div class="pagination" aria-label="Paginação dos resultados">
+        <button type="button" class="page-button" (click)="paginaAnterior()" [disabled]="currentPage() === 1" aria-label="Página anterior">
+          <span class="material-icons" aria-hidden="true">chevron_left</span>
+        </button>
+
+        <span class="page-indicator">Página {{ currentPage() }} de {{ totalPaginas() }}</span>
+
+        <button type="button" class="page-button" (click)="proximaPagina()" [disabled]="currentPage() >= totalPaginas()" aria-label="Próxima página">
+          <span class="material-icons" aria-hidden="true">chevron_right</span>
+        </button>
+      </div>
     }
-
-    var table = document.createElement('table');
-    table.classList.add('tabela');
-    var headerRow = table.insertRow(0);
-
-    Object.keys(data[0]).forEach(function(key)
-    {
-      var th = document.createElement('th');
-      th.textContent = key;
-      headerRow.appendChild(th);
-    });
-
-    data.forEach(function(rowData)
-    {
-      var row = table.insertRow(-1);
-
-      Object.values(rowData).forEach(function(value)
-      {
-        var cell = row.insertCell(-1);
-        cell.textContent = value;
-      });
-    });
-
-    resultadoDiv.appendChild(table);
-  }
-</script>
-</body>
+  </section>
+</main>
